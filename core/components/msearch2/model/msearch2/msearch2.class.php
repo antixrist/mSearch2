@@ -772,12 +772,13 @@ class mSearch2 {
 		$prepared = array();
 		foreach ($this->filters as $table => $filters) {
 			foreach ($filters as $key => $values) {
+				$field = $key;
 				$key = $table . $this->config['filter_delimeter'] . $key;
 				$filter = !empty($built[$key])
 					? $built[$key]
 					: 'default';
 				if ($table == 'tv' && $filter == 'default') {
-					$filter = 'tvs';
+					$filter = $field;
 				}
 				$method = 'build'.ucfirst($filter).'Filter';
 				if (method_exists($this->filtersHandler, $method)) {
